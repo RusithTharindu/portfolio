@@ -31,8 +31,74 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "spendshift",
+    slug: "doodledraw",
     number: "01",
+    title: "DoodleDraw",
+    shortTitle: "Doodle",
+    description:
+      "Local-first drawing app with Excalidraw editing, IndexedDB saves, imports, exports, and a gallery.",
+    tags: ["Next.js", "Excalidraw", "IndexedDB"],
+    year: "2026",
+    status: "LIVE",
+    heading: {
+      before: "",
+      emphasis: "DoodleDraw",
+      after: "browser sketches, saved locally.",
+    },
+    lede:
+      "A local-first drawing app built with Next.js and the embedded Excalidraw editor. It runs fully in the browser, stores drawings in IndexedDB, and gives users a practical workspace for creating, saving, reopening, importing, exporting, duplicating, renaming, and deleting designs without accounts or a backend service.",
+    previewImage: "/projects/doodledraw/preview.webp",
+    previewAlt:
+      "DoodleDraw interface showing a browser-based Excalidraw drawing workspace with saved design controls.",
+    actions: [
+      {
+        label: "Live app",
+        href: "https://doodledraw-murex.vercel.app",
+      },
+      {
+        label: "Source",
+        href: "https://github.com/RusithTharindu/doodledraw",
+      },
+    ],
+    overview: {
+      problem:
+        "Drawing tools are often tied to accounts, remote storage, or single-session canvases. DoodleDraw needed to keep the creative loop immediate: open the app, draw, save locally, return later, and move work in or out through familiar file formats.",
+      approach:
+        "DoodleDraw uses a Next.js 16 App Router structure with an embedded Excalidraw canvas, browser-native IndexedDB persistence through idb, autosave status feedback, a saved-design gallery, route-based editing for existing drawings, and import/export utilities for Excalidraw, JSON, PNG, and SVG files. The storage layer is wrapped behind an abstraction so future sync or filesystem providers can be added without rewriting the editor UI.",
+    },
+    role:
+      "Full-stack frontend engineer. Designed and implemented the local-first product experience, editor shell, autosave flow, IndexedDB storage model, gallery management, import/export path, thumbnail generation, responsive UI, and Vercel deployment.",
+    highlights: [
+      "Embedded Excalidraw canvas supports shapes, text, free draw, images, pan, zoom, undo, redo, selection, resizing, and object movement.",
+      "IndexedDB persistence stores saved designs with elements, app state, binary files, timestamps, and generated PNG thumbnails for gallery previews.",
+      "Autosave and manual save flows make in-progress work visible while still allowing empty or partial drawings to be captured intentionally.",
+      "Gallery tools support reopening, renaming, duplicating, and deleting designs from local browser storage.",
+      "Import and export flows cover .excalidraw, .json, .png, and .svg scene or image files without API routes, authentication, or a remote database.",
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS",
+      "Excalidraw",
+      "IndexedDB",
+      "idb",
+      "uuid",
+      "date-fns",
+      "lucide-react",
+      "Vercel",
+    ],
+    glance: [
+      ["Surface", "Local-first drawing web app"],
+      ["Routes", "Home, editor, saved designs, design detail"],
+      ["Editor", "Embedded Excalidraw canvas"],
+      ["Storage", "IndexedDB via idb"],
+      ["Status", "Live / public source"],
+    ],
+  },
+  {
+    slug: "spendshift",
+    number: "02",
     title: "SpendShift",
     shortTitle: "SpendShift",
     description:
@@ -95,7 +161,7 @@ export const projects: Project[] = [
   },
   {
     slug: "passgo",
-    number: "02",
+    number: "03",
     title: "Project PassGo",
     shortTitle: "PassGo",
     description:
@@ -159,7 +225,7 @@ export const projects: Project[] = [
   },
   {
     slug: "respawn-realm",
-    number: "03",
+    number: "04",
     title: "RespawnRealm",
     shortTitle: "Respawn",
     description:
@@ -209,7 +275,7 @@ export const projects: Project[] = [
   },
   {
     slug: "healthharmony",
-    number: "04",
+    number: "05",
     title: "HealthHarmony",
     shortTitle: "Health",
     description:
@@ -269,7 +335,7 @@ export const projects: Project[] = [
   },
   {
     slug: "techie-sleuths-2024",
-    number: "05",
+    number: "06",
     title: "Techie Sleuths 2024",
     shortTitle: "Sleuths",
     description:
@@ -328,7 +394,7 @@ export const projects: Project[] = [
   },
   {
     slug: "campus-housing-portal",
-    number: "06",
+    number: "07",
     title: "Campus Housing Portal",
     shortTitle: "Housing",
     description:
@@ -384,7 +450,7 @@ export const projects: Project[] = [
   },
   {
     slug: "purrfectpal",
-    number: "07",
+    number: "08",
     title: "PurrfectPal",
     shortTitle: "Purrfect",
     description:
@@ -439,7 +505,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tasktrail",
-    number: "08",
+    number: "09",
     title: "TaskTrail",
     shortTitle: "TaskTrail",
     description:
