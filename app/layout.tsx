@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Rusith Tharindu Thushan - Software Engineer",
   description:
-    "Bento-inspired portfolio for Rusith Tharindu Thushan, a software engineer building resilient full-stack systems.",
+    "Portfolio of Rusith Tharindu Thushan, a software engineer building resilient full-stack systems.",
 };
 
 export default function RootLayout({
