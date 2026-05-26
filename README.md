@@ -1,4 +1,4 @@
-# Bento Portfolio
+# Portfolio
 
 Personal portfolio of **Rusith Tharindu Thushan** — software engineer building resilient full-stack systems.
 
