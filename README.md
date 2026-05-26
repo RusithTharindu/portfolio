@@ -2,8 +2,6 @@
 
 A bento-inspired personal portfolio for Rusith Tharindu Thushan, built with Next.js, React, TypeScript, and Tailwind CSS.
 
-The goal of this project is to ship a polished, production-grade portfolio experience with strong type safety, clean component architecture, responsive layouts, and a visual direction based on the `bento-portfolio-handoff/` design bundle.
-
 ## Requirements
 
 - Node.js 22
