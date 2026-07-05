@@ -933,6 +933,7 @@ a {
   font-size: 11px;
 }
 
+
 .gh-grid {
   aspect-ratio: 26 / 7;
   display: grid;
@@ -2128,6 +2129,7 @@ a.tm-line:hover {
     opacity: 0;
   }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   *,

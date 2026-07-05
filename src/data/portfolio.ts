@@ -2,9 +2,12 @@ export const stackGroups: Array<[string, string[]]> = [
   ["Languages", ["TypeScript", "JavaScript", "Java"]],
   ["Frontend", ["React", "Next.js", "Tailwind"]],
   ["Backend", ["Node.js", "NestJS", "Spring Boot", "Express"]],
-  ["Databases", ["PostgreSQL", "MongoDB", "Redis"]],
+  ["Databases", ["PostgreSQL", "MongoDB", "Redis", "MySQL"]],
+  ["Cloud", ["AWS", "Azure", "Docker"]],
+  ["CI/CD", ["GitHub Actions", "Jenkins"]],
   ["Animation", ["Motion", "GSAP"]],
-  ["Tools", ["Git", "Docker", "Figma", "Postman"]],
+  ["Testing", ["Postman", "Insomnia"]],
+  ["Design", ["Figma"]],
 ];
 
 export const stats: Array<[string, string, string]> = [
@@ -19,13 +22,13 @@ export const timeline: Array<[string, string, string, string]> = [
     "2024 - PRESENT",
     "Software Engineer",
     "Rootcode",
-    "Develop and maintain high-performance web applications using React and Node.js.",
+    "Develop and maintain high-performance web applications using React, Next JS, Spring Boot. Collaborate with cross-functional teams to deliver scalable solutions. ",
   ],
   [
     "2022 - 2024",
     "Software Engineer",
     "Flyxto",
-    "Build scalable web applications using React and Node.js.",
+    "Build scalable web applications using React and Next.js. Implement RESTful APIs and integrate with third-party services.",
   ],
 ];
 

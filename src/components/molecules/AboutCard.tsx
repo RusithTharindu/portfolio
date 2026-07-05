@@ -7,7 +7,7 @@ export function AboutCard() {
       <div className="about">
         <SectionLabel>About</SectionLabel>
         <p>
-          I work across the stack and care about the seams —
+          I work across the stack and care about the seams -
           <strong>
             where the API meets the UI, where trust assumptions break, where
             abstractions leak
