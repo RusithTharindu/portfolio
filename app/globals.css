@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -11,7 +9,7 @@
   --border-2: #2a2a2e;
   --text: #ededee;
   --text-2: #8a8a90;
-  --text-3: #55555a;
+  --text-3: #7a7a80;
   --accent: oklch(0.72 0.18 20);
   --accent-soft: oklch(0.72 0.18 20 / 0.12);
   --accent-glow: oklch(0.72 0.18 20 / 0.35);
@@ -22,9 +20,9 @@
   --radius: 18px;
   --radius-sm: 10px;
   --ff-sans:
-    "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  --ff-serif: "DM Serif Text", Georgia, "Times New Roman", serif;
+    var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ff-serif: var(--font-dm-serif), Georgia, "Times New Roman", serif;
   --ff-mono:
     "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -933,7 +931,6 @@ a {
   font-size: 11px;
 }
 
-
 .gh-grid {
   aspect-ratio: 26 / 7;
   display: grid;
@@ -1535,7 +1532,7 @@ a.tm-line:hover {
   min-width: 0;
 }
 
-.education-body h3 {
+.education-body h2 {
   color: var(--text);
   font-family: var(--ff-serif), Georgia, serif;
   font-size: 28px;
@@ -1810,8 +1807,18 @@ a.tm-line:hover {
 .preview-media::after {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.06), transparent 26%),
-    radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.08), transparent 35%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.26), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.26));
+    radial-gradient(
+      circle at 50% 12%,
+      rgba(255, 255, 255, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.26),
+      transparent 18%,
+      transparent 82%,
+      rgba(0, 0, 0, 0.26)
+    );
   content: "";
   inset: 0;
   pointer-events: none;
@@ -1879,7 +1886,7 @@ a.tm-line:hover {
   color: var(--text);
 }
 
-.p-body h3 {
+.p-body h2 {
   font-family: var(--ff-serif), Georgia, serif;
   font-size: 28px;
   font-weight: 400;
@@ -1888,7 +1895,7 @@ a.tm-line:hover {
   margin: 0 0 14px;
 }
 
-.p-body h3:not(:first-child) {
+.p-body h2:not(:first-child) {
   margin-top: 22px;
 }
 
@@ -2130,7 +2137,6 @@ a.tm-line:hover {
   }
 }
 
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -2370,7 +2376,7 @@ a.tm-line:hover {
     margin-top: 0;
   }
 
-  .education-body h3 {
+  .education-body h2 {
     font-size: 24px;
   }
 

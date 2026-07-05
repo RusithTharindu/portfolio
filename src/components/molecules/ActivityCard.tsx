@@ -53,7 +53,8 @@ export function ActivityCard({ activity }: ActivityCardProps) {
         <SectionLabel>Activity</SectionLabel>
         <div className="gh-head">
           <div className="gh-count">
-            {activity.totalContributions.toLocaleString()} <small>CONTRIBUTIONS</small>
+            {activity.totalContributions.toLocaleString("en-US")}{" "}
+            <small>CONTRIBUTIONS</small>
           </div>
           <div className="gh-year">
             {activity.source === "github" ? "GitHub" : "sample data"}

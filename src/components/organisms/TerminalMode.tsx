@@ -487,6 +487,7 @@ export function TerminalMode({ isActive, onExit }: TerminalModeProps) {
       aria-hidden={!isActive}
       aria-label="Terminal portfolio mode"
       className={isActive ? "terminal-mode is-active" : "terminal-mode"}
+      inert={!isActive}
     >
       <div className="terminal-mode-window">
         <div className="terminal-mode-bar">
