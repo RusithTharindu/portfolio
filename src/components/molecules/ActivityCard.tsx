@@ -1,6 +1,5 @@
 import { ActivityGrid } from "@/src/components/atoms/ActivityGrid";
 import { MotionCard } from "@/src/components/atoms/MotionCard";
-import { RefreshButton } from "@/src/components/atoms/RefreshButton";
 import { SectionLabel } from "@/src/components/atoms/SectionLabel";
 import type { GitHubActivity, GitHubRepository } from "@/src/lib/github";
 
@@ -56,11 +55,8 @@ export function ActivityCard({ activity }: ActivityCardProps) {
           <div className="gh-count">
             {activity.totalContributions.toLocaleString()} <small>CONTRIBUTIONS</small>
           </div>
-          <div className="gh-head-right">
-            <span className="gh-year">
-              {activity.source === "github" ? "GitHub" : "sample data"}
-            </span>
-            <RefreshButton />
+          <div className="gh-year">
+            {activity.source === "github" ? "GitHub" : "sample data"}
           </div>
         </div>
         <ActivityGrid cells={activity.cells} />
