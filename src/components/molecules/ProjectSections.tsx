@@ -25,9 +25,9 @@ export function ProjectSections({ project }: ProjectSectionsProps) {
     <div className="p-grid">
       <div className="p-label">Overview</div>
       <div className="p-body p-section">
-        <h3>The problem</h3>
+        <h2>The problem</h2>
         <p>{project.overview.problem}</p>
-        <h3>The approach</h3>
+        <h2>The approach</h2>
         <p>{project.overview.approach}</p>
       </div>
 

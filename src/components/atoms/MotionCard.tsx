@@ -7,6 +7,7 @@ type MotionCardProps = {
   className: string;
   id?: string;
   delay?: number;
+  skipEntranceAnimation?: boolean;
 };
 
 const cardVariants: Variants = {
@@ -27,13 +28,19 @@ const cardVariants: Variants = {
   }),
 };
 
-export function MotionCard({ children, className, id, delay = 0 }: MotionCardProps) {
+export function MotionCard({
+  children,
+  className,
+  id,
+  delay = 0,
+  skipEntranceAnimation = false,
+}: MotionCardProps) {
   return (
     <motion.section
       className={className}
       custom={delay}
       id={id}
-      initial="hidden"
+      initial={skipEntranceAnimation ? false : "hidden"}
       animate="visible"
       variants={cardVariants}
       whileHover={{

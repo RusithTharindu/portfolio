@@ -5,7 +5,7 @@ export function HeroCard() {
   const currentYear = getCurrentYear();
 
   return (
-    <MotionCard className="cell c-hero">
+    <MotionCard className="cell c-hero" skipEntranceAnimation>
       <div className="hero">
         <div className="hero-top">
           <div className="hero-meta">- PORTFOLIO / {currentYear}</div>
@@ -24,7 +24,7 @@ export function HeroCard() {
             </span>
           </h1>
           <p className="hero-sub">
-            I build products across the full stack — clean APIs, tight
+            I build products across the full stack - clean APIs, tight
             frontends, and the invisible layer in between. Currently deepening
             into security while shipping production software that holds up.
           </p>

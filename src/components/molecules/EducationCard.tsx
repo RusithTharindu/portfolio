@@ -19,7 +19,7 @@ export function EducationCard() {
               <div className="education-period">{item.period}</div>
               <div className="education-body">
                 <div className="education-title-row">
-                  <h3>{item.qualification}</h3>
+                  <h2>{item.qualification}</h2>
                   <span className={`education-state ${item.state}`}>
                     {item.state === "current" ? "Pursuing" : "Completed"}
                   </span>
