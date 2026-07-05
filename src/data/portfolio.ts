@@ -2,9 +2,12 @@ export const stackGroups: Array<[string, string[]]> = [
   ["Languages", ["TypeScript", "JavaScript", "Java"]],
   ["Frontend", ["React", "Next.js", "Tailwind"]],
   ["Backend", ["Node.js", "NestJS", "Spring Boot", "Express"]],
-  ["Databases", ["PostgreSQL", "MongoDB", "Redis"]],
+  ["Databases", ["PostgreSQL", "MongoDB", "Redis", "MySQL"]],
+  ["Cloud", ["AWS", "Azure", "Docker"]],
+  ["CI/CD", ["GitHub Actions", "Jenkins"]],
   ["Animation", ["Motion", "GSAP"]],
-  ["Tools", ["Git", "Docker", "Figma", "Postman"]],
+  ["Testing", ["Postman", "Insomnia"]],
+  ["Design", ["Figma"]],
 ];
 
 export const stats: Array<[string, string, string]> = [

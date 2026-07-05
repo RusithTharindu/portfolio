@@ -215,6 +215,7 @@ export async function getGitHubActivity(): Promise<GitHubActivity> {
       }),
       next: {
         revalidate: 60 * 60 * 6,
+        tags: ["github-activity"],
       },
     });
 
