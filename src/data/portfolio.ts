@@ -19,13 +19,13 @@ export const timeline: Array<[string, string, string, string]> = [
     "2024 - PRESENT",
     "Software Engineer",
     "Rootcode",
-    "Develop and maintain high-performance web applications using React and Node.js.",
+    "Develop and maintain high-performance web applications using React, Next JS, Spring Boot. Collaborate with cross-functional teams to deliver scalable solutions. ",
   ],
   [
     "2022 - 2024",
     "Software Engineer",
     "Flyxto",
-    "Build scalable web applications using React and Node.js.",
+    "Build scalable web applications using React and Next.js. Implement RESTful APIs and integrate with third-party services.",
   ],
 ];
 
