@@ -20,7 +20,7 @@ Anyone: recruiters, co-workers, people who find him online. Success is someone l
 
 - Replace the bento grid with a single framed column in the style of the approved mockup (see "Reference mockup").
 - Bring in the motion vocabulary listed under "Motion", tuned to be subtle.
-- Personal sections that are true to Rusith: Now, Writing, Shelf (anime/manga/games).
+- Personal sections that are true to Rusith: Now, Writing, Shelf (books).
 - Keep the project case-study pages, restyled to the new system.
 - Keep v1 safe in git.
 - Production grade, type safe, mobile responsive, accessible (per `CLAUDE.md` and `AGENTS.md`).
@@ -82,7 +82,7 @@ Home, top to bottom:
 4. **Work:** featured projects grouped by year (italic year chips), "new" tag where flagged, rows link to `/projects/[slug]`, band link to the `/projects` index. Hover reveals a small tilted screenshot preview on desktop (from `public/projects/<slug>/`), hidden on touch/mobile.
 5. **Experience:** jobs and degrees in one list (from existing `timeline` and `education` data).
 6. **Writing:** latest Medium posts (title, date, link) fetched at build time from the Medium RSS feed for `@devrusith`. If the fetch fails or returns nothing, hide the section rather than failing the build.
-7. **Shelf:** a horizontal row of anime/manga/game covers, each with title, type and a one-line note from Rusith. Typed data file. Cover images stored locally under `public/`.
+7. **Shelf (changed by Rusith, 2026-11-03: books instead of anime/manga/games):** books standing spine-out on a shelf; picking one turns it to show its cover, with title, author, a "reading now" tag and a one-line note from Rusith below. The idea follows Aditya's bookshelf; the implementation and look (ink spines, typographic covers) are our own. Typed data file (`src/data/books.ts`); optional cover images stored locally under `public/books/`.
 8. **Socials:** icon tile, name, handle, arrow. From existing `socials` data.
 9. **Stack:** numbered list (01, 02, …) of grouped skills. Trim the existing `stackGroups` to the essential groups.
 10. **Commits:** contribution graph using real data from `src/lib/github.ts`, amber scale, total count rolls up when scrolled into view.
