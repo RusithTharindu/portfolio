@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Band } from "@/src/components/chrome/Band";
 import { MenuPill } from "@/src/components/chrome/MenuPill";
+import { RevealGroup } from "@/src/components/chrome/RevealGroup";
 import { Rule } from "@/src/components/chrome/Rule";
 import { homeSectionLinks } from "@/src/components/chrome/sections";
 import { Shell } from "@/src/components/chrome/Shell";
@@ -37,7 +38,7 @@ export default function ProjectsPage() {
         <SiteHeader sections={[]} />
         <Rule />
         <main>
-          <section aria-labelledby="projects-title">
+          <RevealGroup as="section" aria-labelledby="projects-title">
             <h1 className="sr-only">Projects</h1>
             <Band
               id="projects-title"
@@ -49,7 +50,7 @@ export default function ProjectsPage() {
               }
             />
             <YearGroupedProjects groups={groupProjectsByYear(projects)} showPreview />
-          </section>
+          </RevealGroup>
           <Rule />
         </main>
         <SiteFooter />

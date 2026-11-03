@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Band } from "@/src/components/chrome/Band";
-import { Reveal } from "@/src/components/chrome/Reveal";
+import { RevealGroup } from "@/src/components/chrome/RevealGroup";
 import { YearGroupedProjects } from "@/src/components/project/YearGroupedProjects";
 import { getFeaturedProjects, groupProjectsByYear } from "@/src/data/projects";
 
@@ -8,7 +8,7 @@ export function WorkSection() {
   const groups = groupProjectsByYear(getFeaturedProjects());
 
   return (
-    <Reveal as="section" id="work" aria-labelledby="work-title">
+    <RevealGroup as="section" id="work" aria-labelledby="work-title">
       <Band
         id="work-title"
         title="Work"
@@ -19,6 +19,6 @@ export function WorkSection() {
         }
       />
       <YearGroupedProjects groups={groups} showPreview />
-    </Reveal>
+    </RevealGroup>
   );
 }

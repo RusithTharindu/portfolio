@@ -12,14 +12,14 @@ export function YearGroupedProjects({ groups, showPreview }: YearGroupedProjects
     <div className="pb-3.5">
       {groups.map((group) => (
         <div key={group.year}>
-          <h3 className="px-4 pt-4 pb-1.5 xs:px-7">
+          <h3 data-reveal-item="" className="px-4 pt-4 pb-1.5 xs:px-7">
             <span className="rounded bg-[#1a1a1a] px-2 font-serif text-[18px] text-t1 italic">
               {group.year}
             </span>
           </h3>
           <ul>
             {group.projects.map((project) => (
-              <li key={project.slug}>
+              <li key={project.slug} data-reveal-item="">
                 <Link
                   href={`/projects/${project.slug}`}
                   className="group relative flex items-baseline gap-3 py-[9px] pr-4 pl-6 outline-offset-[-2px] before:absolute before:inset-x-2 before:inset-y-0.5 before:rounded-lg before:bg-[#141414] before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 focus-visible:before:opacity-100 xs:pr-7 xs:pl-10 xs:before:inset-x-4"

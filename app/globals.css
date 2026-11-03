@@ -119,6 +119,20 @@
     translate: 0 12px;
   }
 
+  /* Row-by-row reveal (see src/components/chrome/RevealGroup.tsx). */
+  [data-reveal-item] {
+    opacity: 0;
+    translate: 0 10px;
+    transition:
+      opacity 0.55s var(--ease-soft),
+      translate 0.55s var(--ease-soft);
+  }
+
+  [data-reveal-item][data-revealed] {
+    opacity: 1;
+    translate: none;
+  }
+
   :focus-visible {
     outline: 1px solid var(--color-acc);
     outline-offset: 2px;
@@ -145,6 +159,12 @@
       transition-duration: 0.01ms !important;
       transition-delay: 0s !important;
       scroll-behavior: auto !important;
+    }
+
+    /* Rows that otherwise reveal on scroll are simply there. */
+    [data-reveal-item] {
+      opacity: 1;
+      translate: none;
     }
 
     /* Elements that otherwise scale or slide in on scroll render in place. */
