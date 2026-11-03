@@ -120,8 +120,17 @@
     *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      animation-delay: 0s !important;
       transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
       scroll-behavior: auto !important;
+    }
+
+    /* Elements that otherwise scale or slide in on scroll render in place. */
+    [data-settle] {
+      scale: none !important;
+      translate: none !important;
+      transform: none !important;
     }
 
     /* Brush underline and signature are shown fully drawn from the first paint. */

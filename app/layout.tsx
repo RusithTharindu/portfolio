@@ -36,7 +36,7 @@ const newsreader = Newsreader({
 
 /** Without JS, entrance and reveal states must not hide content or undrawn strokes. */
 const noScriptCss =
-  "[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}" +
+  "[data-reveal]{opacity:1!important;transform:none!important;scale:none!important;translate:none!important;filter:none!important}" +
   "[data-draw]{stroke-dasharray:none!important;stroke-dashoffset:0!important}";
 
 export const metadata: Metadata = {
