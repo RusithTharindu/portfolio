@@ -3,6 +3,8 @@ export type Project = {
   number: string;
   title: string;
   shortTitle: string;
+  /** A few words for list rows (home Work list, /projects). */
+  tagline: string;
   description: string;
   tags: string[];
   year: string;
@@ -15,6 +17,8 @@ export type Project = {
   lede: string;
   previewImage?: string;
   previewAlt?: string;
+  /** Intrinsic size of `previewImage`, so the page reserves its space. */
+  previewSize?: { width: number; height: number };
   actions: Array<{
     label: string;
     href: string;
@@ -27,14 +31,21 @@ export type Project = {
   highlights: string[];
   stack: string[];
   glance: Array<[string, string]>;
+  /** Shown on the home page Work list. Keep to about five. */
+  featured?: boolean;
+  /** Adds the amber "new" tag. */
+  isNew?: boolean;
 };
 
 export const projects: Project[] = [
   {
     slug: "doodledraw",
+    featured: true,
+    isNew: true,
     number: "01",
     title: "DoodleDraw",
     shortTitle: "Doodle",
+    tagline: "Local-first drawing app",
     description:
       "Local-first drawing app with Excalidraw editing, IndexedDB saves, imports, exports, and a gallery.",
     tags: ["Next.js", "Excalidraw", "IndexedDB"],
@@ -48,6 +59,7 @@ export const projects: Project[] = [
     lede:
       "A local-first drawing app built with Next.js and the embedded Excalidraw editor. It runs fully in the browser, stores drawings in IndexedDB, and gives users a practical workspace for creating, saving, reopening, importing, exporting, duplicating, renaming, and deleting designs without accounts or a backend service.",
     previewImage: "/projects/doodledraw/preview.webp",
+    previewSize: { width: 1387, height: 820 },
     previewAlt:
       "DoodleDraw interface showing a browser-based Excalidraw drawing workspace with saved design controls.",
     actions: [
@@ -98,9 +110,11 @@ export const projects: Project[] = [
   },
   {
     slug: "spendshift",
+    featured: true,
     number: "02",
     title: "SpendShift",
     shortTitle: "SpendShift",
+    tagline: "Expense tracker with budgets",
     description:
       "Personal expense tracker with budgets, insights, categories, auth, and CSV export.",
     tags: ["Next.js", "MongoDB", "Finance"],
@@ -114,6 +128,7 @@ export const projects: Project[] = [
     lede:
       "A web-based personal expense tracker built as a full-stack Next.js application. It helps users log expenses, organize categories, set monthly budgets, inspect spending patterns, customize the interface, and export their financial activity from a polished responsive dashboard.",
     previewImage: "/projects/spendshift/preview.webp",
+    previewSize: { width: 1383, height: 819 },
     previewAlt:
       "SpendShift dashboard showing personal expense totals, spending charts, budgets, and recent activity.",
     actions: [
@@ -161,9 +176,11 @@ export const projects: Project[] = [
   },
   {
     slug: "passgo",
+    featured: true,
     number: "03",
     title: "Project PassGo",
     shortTitle: "PassGo",
+    tagline: "Digital passport services",
     description:
       "Digital passport application, renewal, appointment, and document review platform.",
     tags: ["Next.js", "NestJS", "OCR"],
@@ -225,9 +242,11 @@ export const projects: Project[] = [
   },
   {
     slug: "respawn-realm",
+    featured: true,
     number: "04",
     title: "RespawnRealm",
     shortTitle: "Respawn",
+    tagline: "Gaming landing experience",
     description:
       "Gaming-inspired landing experience with cinematic motion and media-driven sections.",
     tags: ["Vite", "React", "GSAP"],
@@ -275,9 +294,11 @@ export const projects: Project[] = [
   },
   {
     slug: "healthharmony",
+    featured: true,
     number: "05",
     title: "HealthHarmony",
     shortTitle: "Health",
+    tagline: "Patient intake and appointments",
     description:
       "Healthcare management system for patient intake, registration, and appointments.",
     tags: ["Next.js", "Appwrite", "Twilio"],
@@ -338,6 +359,7 @@ export const projects: Project[] = [
     number: "06",
     title: "Techie Sleuths 2024",
     shortTitle: "Sleuths",
+    tagline: "Puzzle-event frontend",
     description:
       "FOSS NSBM puzzle-event frontend with clues, crosswords, auth, and leaderboard play.",
     tags: ["Next.js", "Redux", "Puzzles"],
@@ -397,6 +419,7 @@ export const projects: Project[] = [
     number: "07",
     title: "Campus Housing Portal",
     shortTitle: "Housing",
+    tagline: "Student housing portal",
     description:
       "React and Tailwind housing portal for students, landlords, wardens, and admins.",
     tags: ["React", "Vite", "Maps"],
@@ -453,6 +476,7 @@ export const projects: Project[] = [
     number: "08",
     title: "PurrfectPal",
     shortTitle: "Purrfect",
+    tagline: "Pet-care mobile app",
     description:
       "React Native pet-care mobile app backed by Firebase auth, Firestore, and storage.",
     tags: ["React Native", "Firebase", "Mobile"],
@@ -508,6 +532,7 @@ export const projects: Project[] = [
     number: "09",
     title: "TaskTrail",
     shortTitle: "TaskTrail",
+    tagline: "Task marketplace app",
     description:
       "Flutter job and task marketplace with auth, listings, requests, profiles, and themes.",
     tags: ["Flutter", "Firebase", "Dart"],
@@ -571,4 +596,28 @@ export function getNextProject(slug: string) {
   }
 
   return projects[(index + 1) % projects.length];
+}
+
+/** Featured projects, newest year first, original order within a year. */
+export function getFeaturedProjects(list: Project[] = projects): Project[] {
+  return groupProjectsByYear(list.filter((project) => project.featured)).flatMap(
+    (group) => group.projects,
+  );
+}
+
+export type ProjectYearGroup = { year: string; projects: Project[] };
+
+/** Groups by year, newest first, keeping the original order inside each year. */
+export function groupProjectsByYear(list: Project[]): ProjectYearGroup[] {
+  const byYear = new Map<string, Project[]>();
+
+  for (const project of list) {
+    const group = byYear.get(project.year);
+    if (group) group.push(project);
+    else byYear.set(project.year, [project]);
+  }
+
+  return [...byYear.entries()]
+    .sort(([a], [b]) => Number(b) - Number(a))
+    .map(([year, projects]) => ({ year, projects }));
 }
