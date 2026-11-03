@@ -7,6 +7,16 @@ export type SectionLink = {
   href?: string;
 };
 
+/** Menu links from pages other than home: sections that always render there. */
+export const homeSectionLinks: SectionLink[] = [
+  { id: "home", label: "home", href: "/" },
+  { id: "work", label: "work", href: "/#work" },
+  { id: "experience", label: "experience", href: "/#experience" },
+  { id: "shelf", label: "shelf", href: "/#shelf" },
+  { id: "socials", label: "socials", href: "/#socials" },
+  { id: "stack", label: "stack", href: "/#stack" },
+];
+
 export function sectionHref(section: SectionLink): string {
   return section.href ?? `#${section.id}`;
 }

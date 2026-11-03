@@ -40,7 +40,11 @@ const noScriptCss =
   "[data-draw]{stroke-dasharray:none!important;stroke-dashoffset:0!important}";
 
 export const metadata: Metadata = {
-  title: `${site.name} · ${site.role}`,
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} · ${site.role}`,
+    template: `%s · ${site.firstName}`,
+  },
   description: `${site.firstName} is a ${site.role.toLowerCase()} at ${site.company.name} in ${site.location.label}, building full-stack products and studying cybersecurity.`,
 };
 

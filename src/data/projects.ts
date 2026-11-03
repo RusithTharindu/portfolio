@@ -17,6 +17,8 @@ export type Project = {
   lede: string;
   previewImage?: string;
   previewAlt?: string;
+  /** Intrinsic size of `previewImage`, so the page reserves its space. */
+  previewSize?: { width: number; height: number };
   actions: Array<{
     label: string;
     href: string;
@@ -57,6 +59,7 @@ export const projects: Project[] = [
     lede:
       "A local-first drawing app built with Next.js and the embedded Excalidraw editor. It runs fully in the browser, stores drawings in IndexedDB, and gives users a practical workspace for creating, saving, reopening, importing, exporting, duplicating, renaming, and deleting designs without accounts or a backend service.",
     previewImage: "/projects/doodledraw/preview.webp",
+    previewSize: { width: 1387, height: 820 },
     previewAlt:
       "DoodleDraw interface showing a browser-based Excalidraw drawing workspace with saved design controls.",
     actions: [
@@ -125,6 +128,7 @@ export const projects: Project[] = [
     lede:
       "A web-based personal expense tracker built as a full-stack Next.js application. It helps users log expenses, organize categories, set monthly budgets, inspect spending patterns, customize the interface, and export their financial activity from a polished responsive dashboard.",
     previewImage: "/projects/spendshift/preview.webp",
+    previewSize: { width: 1383, height: 819 },
     previewAlt:
       "SpendShift dashboard showing personal expense totals, spending charts, budgets, and recent activity.",
     actions: [
