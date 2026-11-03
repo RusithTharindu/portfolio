@@ -27,11 +27,17 @@ export type Project = {
   highlights: string[];
   stack: string[];
   glance: Array<[string, string]>;
+  /** Shown on the home page Work list. Keep to about five. */
+  featured?: boolean;
+  /** Adds the amber "new" tag. */
+  isNew?: boolean;
 };
 
 export const projects: Project[] = [
   {
     slug: "doodledraw",
+    featured: true,
+    isNew: true,
     number: "01",
     title: "DoodleDraw",
     shortTitle: "Doodle",
@@ -98,6 +104,7 @@ export const projects: Project[] = [
   },
   {
     slug: "spendshift",
+    featured: true,
     number: "02",
     title: "SpendShift",
     shortTitle: "SpendShift",
@@ -161,6 +168,7 @@ export const projects: Project[] = [
   },
   {
     slug: "passgo",
+    featured: true,
     number: "03",
     title: "Project PassGo",
     shortTitle: "PassGo",
@@ -225,6 +233,7 @@ export const projects: Project[] = [
   },
   {
     slug: "respawn-realm",
+    featured: true,
     number: "04",
     title: "RespawnRealm",
     shortTitle: "Respawn",
@@ -275,6 +284,7 @@ export const projects: Project[] = [
   },
   {
     slug: "healthharmony",
+    featured: true,
     number: "05",
     title: "HealthHarmony",
     shortTitle: "Health",
@@ -571,4 +581,28 @@ export function getNextProject(slug: string) {
   }
 
   return projects[(index + 1) % projects.length];
+}
+
+/** Featured projects, newest year first, original order within a year. */
+export function getFeaturedProjects(list: Project[] = projects): Project[] {
+  return groupProjectsByYear(list.filter((project) => project.featured)).flatMap(
+    (group) => group.projects,
+  );
+}
+
+export type ProjectYearGroup = { year: string; projects: Project[] };
+
+/** Groups by year, newest first, keeping the original order inside each year. */
+export function groupProjectsByYear(list: Project[]): ProjectYearGroup[] {
+  const byYear = new Map<string, Project[]>();
+
+  for (const project of list) {
+    const group = byYear.get(project.year);
+    if (group) group.push(project);
+    else byYear.set(project.year, [project]);
+  }
+
+  return [...byYear.entries()]
+    .sort(([a], [b]) => Number(b) - Number(a))
+    .map(([year, projects]) => ({ year, projects }));
 }

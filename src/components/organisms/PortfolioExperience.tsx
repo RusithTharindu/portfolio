@@ -2,7 +2,6 @@
 
 import { Spotlight } from "@/src/components/atoms/Spotlight";
 import { AboutCard } from "@/src/components/molecules/AboutCard";
-import { ActivityCard } from "@/src/components/molecules/ActivityCard";
 import { ContactCard } from "@/src/components/molecules/ContactCard";
 import { EducationCard } from "@/src/components/molecules/EducationCard";
 import { HeroCard } from "@/src/components/molecules/HeroCard";
@@ -84,7 +83,6 @@ export function PortfolioExperience({ activity }: PortfolioExperienceProps) {
             <StackCard />
             <StatsCard />
             <ProjectsCard />
-            <ActivityCard activity={activity} />
             <TerminalCard />
             <TimelineCard />
             <EducationCard />
