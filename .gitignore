@@ -42,3 +42,6 @@ next-env.d.ts
 
 # build reference
 /bento-portfolio-handoff
+
+# superpowers scratch
+.superpowers/
