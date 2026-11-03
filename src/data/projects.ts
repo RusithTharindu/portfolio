@@ -3,6 +3,8 @@ export type Project = {
   number: string;
   title: string;
   shortTitle: string;
+  /** A few words for list rows (home Work list, /projects). */
+  tagline: string;
   description: string;
   tags: string[];
   year: string;
@@ -41,6 +43,7 @@ export const projects: Project[] = [
     number: "01",
     title: "DoodleDraw",
     shortTitle: "Doodle",
+    tagline: "Local-first drawing app",
     description:
       "Local-first drawing app with Excalidraw editing, IndexedDB saves, imports, exports, and a gallery.",
     tags: ["Next.js", "Excalidraw", "IndexedDB"],
@@ -108,6 +111,7 @@ export const projects: Project[] = [
     number: "02",
     title: "SpendShift",
     shortTitle: "SpendShift",
+    tagline: "Expense tracker with budgets",
     description:
       "Personal expense tracker with budgets, insights, categories, auth, and CSV export.",
     tags: ["Next.js", "MongoDB", "Finance"],
@@ -172,6 +176,7 @@ export const projects: Project[] = [
     number: "03",
     title: "Project PassGo",
     shortTitle: "PassGo",
+    tagline: "Digital passport services",
     description:
       "Digital passport application, renewal, appointment, and document review platform.",
     tags: ["Next.js", "NestJS", "OCR"],
@@ -237,6 +242,7 @@ export const projects: Project[] = [
     number: "04",
     title: "RespawnRealm",
     shortTitle: "Respawn",
+    tagline: "Gaming landing experience",
     description:
       "Gaming-inspired landing experience with cinematic motion and media-driven sections.",
     tags: ["Vite", "React", "GSAP"],
@@ -288,6 +294,7 @@ export const projects: Project[] = [
     number: "05",
     title: "HealthHarmony",
     shortTitle: "Health",
+    tagline: "Patient intake and appointments",
     description:
       "Healthcare management system for patient intake, registration, and appointments.",
     tags: ["Next.js", "Appwrite", "Twilio"],
@@ -348,6 +355,7 @@ export const projects: Project[] = [
     number: "06",
     title: "Techie Sleuths 2024",
     shortTitle: "Sleuths",
+    tagline: "Puzzle-event frontend",
     description:
       "FOSS NSBM puzzle-event frontend with clues, crosswords, auth, and leaderboard play.",
     tags: ["Next.js", "Redux", "Puzzles"],
@@ -407,6 +415,7 @@ export const projects: Project[] = [
     number: "07",
     title: "Campus Housing Portal",
     shortTitle: "Housing",
+    tagline: "Student housing portal",
     description:
       "React and Tailwind housing portal for students, landlords, wardens, and admins.",
     tags: ["React", "Vite", "Maps"],
@@ -463,6 +472,7 @@ export const projects: Project[] = [
     number: "08",
     title: "PurrfectPal",
     shortTitle: "Purrfect",
+    tagline: "Pet-care mobile app",
     description:
       "React Native pet-care mobile app backed by Firebase auth, Firestore, and storage.",
     tags: ["React Native", "Firebase", "Mobile"],
@@ -518,6 +528,7 @@ export const projects: Project[] = [
     number: "09",
     title: "TaskTrail",
     shortTitle: "TaskTrail",
+    tagline: "Task marketplace app",
     description:
       "Flutter job and task marketplace with auth, listings, requests, profiles, and themes.",
     tags: ["Flutter", "Firebase", "Dart"],
