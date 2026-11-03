@@ -38,8 +38,8 @@ export default async function Home() {
     { id: "education", label: "education" },
     ...(hasWriting ? [{ id: "writing", label: "writing" }] : []),
     // { id: "shelf", label: "shelf" },
-    { id: "socials", label: "socials" },
     { id: "stack", label: "stack" },
+    { id: "socials", label: "socials" },
     ...(hasCommits ? [{ id: "commits", label: "commits" }] : []),
   ];
   const headerSections = ["writing", "now"].flatMap((id) =>
@@ -70,9 +70,9 @@ export default async function Home() {
           ) : null}
           {/* <ShelfSection />
           <Rule /> */}
-          <SocialsSection />
-          <Rule />
           <StackSection />
+          <Rule />
+          <SocialsSection />
           <Rule />
           {hasCommits ? (
             <>
