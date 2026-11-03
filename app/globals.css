@@ -123,6 +123,12 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+
+    /* Brush underline and signature are shown fully drawn from the first paint. */
+    [data-draw] {
+      stroke-dasharray: none !important;
+      stroke-dashoffset: 0 !important;
+    }
   }
 }
 
