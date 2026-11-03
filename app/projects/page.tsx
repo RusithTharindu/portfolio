@@ -9,13 +9,25 @@ import { SiteFooter } from "@/src/components/chrome/SiteFooter";
 import { SiteHeader } from "@/src/components/chrome/SiteHeader";
 import { YearGroupedProjects } from "@/src/components/project/YearGroupedProjects";
 import { groupProjectsByYear, projects } from "@/src/data/projects";
-import { getCvHref } from "@/src/data/site";
+import { getCvHref, site } from "@/src/data/site";
+import { ogImage } from "@/src/lib/og";
+
+const description =
+  "Every project by Rusith Tharindu Thushan: web platforms, mobile apps, event products and full-stack systems, grouped by year.";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "Every project by Rusith Tharindu Thushan: web platforms, mobile apps, event products and full-stack systems, grouped by year.",
+  description,
   alternates: { canonical: "/projects/" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    url: "/projects/",
+    title: `Projects · ${site.firstName}`,
+    description,
+    images: [ogImage],
+  },
+  twitter: { card: "summary_large_image", title: `Projects · ${site.firstName}`, description, images: [ogImage] },
 };
 
 export default function ProjectsPage() {

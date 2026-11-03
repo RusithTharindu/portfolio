@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Gochi_Hand, IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import { MotionProvider } from "@/src/components/chrome/MotionProvider";
 import { site } from "@/src/data/site";
+import { ogImage } from "@/src/lib/og";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -39,13 +40,32 @@ const noScriptCss =
   "[data-reveal]{opacity:1!important;transform:none!important;scale:none!important;translate:none!important;filter:none!important}" +
   "[data-draw]{stroke-dasharray:none!important;stroke-dashoffset:0!important}";
 
+const title = `${site.name} · ${site.role}`;
+const description = `${site.firstName} is a ${site.role.toLowerCase()} at ${site.company.name} in ${site.location.label}, building full-stack products and studying cybersecurity.`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} · ${site.role}`,
+    default: title,
     template: `%s · ${site.firstName}`,
   },
-  description: `${site.firstName} is a ${site.role.toLowerCase()} at ${site.company.name} in ${site.location.label}, building full-stack products and studying cybersecurity.`,
+  description,
+  authors: [{ name: site.name, url: site.url }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en",
+    title,
+    description,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [ogImage],
+  },
 };
 
 export const viewport: Viewport = {

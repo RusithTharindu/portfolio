@@ -12,7 +12,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+  # Weekly rebuild so Medium posts and GitHub contributions stay current without a push.
+  schedule:
+    - cron: "0 3 * * 1" # Mondays 03:00 UTC
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write

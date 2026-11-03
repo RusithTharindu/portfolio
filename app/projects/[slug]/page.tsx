@@ -8,7 +8,8 @@ import { SiteFooter } from "@/src/components/chrome/SiteFooter";
 import { SiteHeader } from "@/src/components/chrome/SiteHeader";
 import { ProjectDetail } from "@/src/components/project/ProjectDetail";
 import { getNextProject, getProject, projects } from "@/src/data/projects";
-import { getCvHref } from "@/src/data/site";
+import { getCvHref, site } from "@/src/data/site";
+import { ogImage } from "@/src/lib/og";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -26,10 +27,22 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     return { title: "Project not found" };
   }
 
+  const title = `${project.title} · ${site.firstName}`;
+  const url = `/projects/${project.slug}/`;
+
   return {
     title: project.title,
     description: project.description,
-    alternates: { canonical: `/projects/${project.slug}/` },
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: site.name,
+      url,
+      title,
+      description: project.description,
+      images: [ogImage],
+    },
+    twitter: { card: "summary_large_image", title, description: project.description, images: [ogImage] },
   };
 }
 
