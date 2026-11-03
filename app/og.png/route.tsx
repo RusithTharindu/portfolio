@@ -26,10 +26,10 @@ async function loadPlexSans(): Promise<ArrayBuffer | null> {
 
 export async function GET() {
   const [logo, plexSans] = await Promise.all([
-    readFile(join(process.cwd(), "public", site.logo.src)),
+    readFile(join(process.cwd(), "public", site.logo.ogSrc)),
     loadPlexSans(),
   ]);
-  const logoType = site.logo.src.endsWith(".svg") ? "image/svg+xml" : site.logo.src.endsWith(".png") ? "image/png" : "image/jpeg";
+  const logoType = site.logo.ogSrc.endsWith(".svg") ? "image/svg+xml" : site.logo.ogSrc.endsWith(".png") ? "image/png" : "image/jpeg";
   const logoSrc = `data:${logoType};base64,${logo.toString("base64")}`;
 
   return new ImageResponse(
