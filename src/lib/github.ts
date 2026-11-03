@@ -1,42 +1,40 @@
+import { site } from "@/src/data/site";
+
+export type ContributionLevel = 0 | 1 | 2 | 3 | 4;
+
 export type GitHubActivityCell = {
   id: string;
+  /** ISO date `YYYY-MM-DD`; empty for sample cells. */
   date: string;
   count: number;
-  color: string;
-  gridColumn: number;
-  gridRow: number;
-};
-
-export type GitHubRepository = {
-  name: string;
-  description: string | null;
-  url: string;
-  stargazerCount: number;
-  forkCount: number;
-  primaryLanguage: {
-    name: string;
-    color: string | null;
-  } | null;
-  pushedAt: string;
+  level: ContributionLevel;
+  /** 0-based, oldest week first. */
+  week: number;
+  /** 0 = Sunday. */
+  weekday: number;
 };
 
 export type GitHubActivity = {
   totalContributions: number;
-  fromLabel: string;
-  toLabel: string;
+  weeks: number;
   cells: GitHubActivityCell[];
-  topStarredRepositories: GitHubRepository[];
-  recentlyActiveRepositories: GitHubRepository[];
   source: "github" | "fallback";
 };
+
+type GitHubContributionLevel =
+  | "NONE"
+  | "FIRST_QUARTILE"
+  | "SECOND_QUARTILE"
+  | "THIRD_QUARTILE"
+  | "FOURTH_QUARTILE";
 
 type GitHubContributionDay = {
   date: string;
   contributionCount: number;
-  color: string;
+  contributionLevel: GitHubContributionLevel;
 };
 
-type GitHubWeek = {
+export type GitHubWeek = {
   contributionDays: GitHubContributionDay[];
 };
 
@@ -49,21 +47,16 @@ type GitHubGraphQLResponse = {
           weeks: GitHubWeek[];
         };
       };
-      topStarredRepositories: {
-        nodes: GitHubRepository[];
-      };
-      recentlyActiveRepositories: {
-        nodes: GitHubRepository[];
-      };
-    };
+    } | null;
   };
   errors?: Array<{ message: string }>;
 };
 
-const fallbackPalette = ["#18181b", "#2a1a1c", "#4a1f22", "#7a2a2e", "#f06a5f"];
+/** A rolling year: GitHub's default calendar spans 53 partial weeks. */
+const WINDOW_WEEKS = 53;
 
 const githubQuery = `
-  query GitHubPortfolio($login: String!) {
+  query GitHubContributions($login: String!) {
     user(login: $login) {
       contributionsCollection {
         contributionCalendar {
@@ -72,82 +65,53 @@ const githubQuery = `
             contributionDays {
               date
               contributionCount
-              color
+              contributionLevel
             }
           }
-        }
-      }
-      topStarredRepositories: repositories(
-        first: 4
-        ownerAffiliations: OWNER
-        isFork: false
-        orderBy: { field: STARGAZERS, direction: DESC }
-      ) {
-        nodes {
-          name
-          description
-          url
-          stargazerCount
-          forkCount
-          primaryLanguage {
-            name
-            color
-          }
-          pushedAt
-        }
-      }
-      recentlyActiveRepositories: repositories(
-        first: 4
-        ownerAffiliations: OWNER
-        isFork: false
-        orderBy: { field: PUSHED_AT, direction: DESC }
-      ) {
-        nodes {
-          name
-          description
-          url
-          stargazerCount
-          forkCount
-          primaryLanguage {
-            name
-            color
-          }
-          pushedAt
         }
       }
     }
   }
 `;
 
-function formatMonthLabel(date: string) {
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    year: "2-digit",
-  }).format(new Date(date));
+const levels: Record<GitHubContributionLevel, ContributionLevel> = {
+  NONE: 0,
+  FIRST_QUARTILE: 1,
+  SECOND_QUARTILE: 2,
+  THIRD_QUARTILE: 3,
+  FOURTH_QUARTILE: 4,
+};
+
+export function toLevel(level: GitHubContributionLevel): ContributionLevel {
+  return levels[level] ?? 0;
 }
 
-function normalizeWeeks(weeks: GitHubWeek[]) {
-  const recentWeeks = weeks.slice(-26);
-
-  return recentWeeks.flatMap((week, weekIndex) =>
-    week.contributionDays.map((day, dayIndex) => ({
+/** Keeps the most recent 53 weeks; `week` counts from 0 at the oldest kept week. */
+export function normalizeWeeks(weeks: GitHubWeek[]): GitHubActivityCell[] {
+  return weeks.slice(-WINDOW_WEEKS).flatMap((week, weekIndex) =>
+    week.contributionDays.map((day) => ({
       id: day.date,
       date: day.date,
       count: day.contributionCount,
-      color: getContributionColor(day.contributionCount),
-      gridColumn: weekIndex + 1,
-      gridRow: dayIndex + 1,
+      level: toLevel(day.contributionLevel),
+      week: weekIndex,
+      weekday: weekdayOf(day.date),
     })),
   );
 }
 
-function getContributionColor(count: number) {
-  if (count <= 0) return fallbackPalette[0];
-  if (count <= 2) return fallbackPalette[1];
-  if (count <= 5) return fallbackPalette[2];
-  if (count <= 9) return fallbackPalette[3];
+/** Weekday of an ISO date (0 = Sunday); 0 when the date cannot be parsed. */
+function weekdayOf(date: string): number {
+  const day = new Date(`${date}T00:00:00Z`).getUTCDay();
+  return Number.isNaN(day) ? 0 : day;
+}
 
-  return fallbackPalette[4];
+/** Sample data is fine in development but must never ship as if it were real. */
+export function shouldShowCommits(
+  activity: Pick<GitHubActivity, "source">,
+  nodeEnv: string | undefined,
+): boolean {
+  return activity.source === "github" || nodeEnv !== "production";
 }
 
 function createFallbackActivity(): GitHubActivity {
@@ -158,45 +122,35 @@ function createFallbackActivity(): GitHubActivity {
     return seed / 233280;
   };
 
-  for (let day = 0; day < 7; day += 1) {
-    for (let week = 0; week < 26; week += 1) {
+  for (let week = 0; week < WINDOW_WEEKS; week += 1) {
+    for (let weekday = 0; weekday < 7; weekday += 1) {
       const random = rnd();
-      let level = 0;
+      let level: ContributionLevel = 0;
       if (random > 0.35) level = 1;
       if (random > 0.55) level = 2;
       if (random > 0.78) level = 3;
       if (random > 0.92) level = 4;
-      if ((day === 0 || day === 6) && random < 0.7) {
-        level = Math.max(0, level - 1);
+      if ((weekday === 0 || weekday === 6) && random < 0.7 && level > 0) {
+        level = (level - 1) as ContributionLevel;
       }
 
-      cells.push({
-        id: `${week}-${day}`,
-        date: "",
-        count: level,
-        color: fallbackPalette[level],
-        gridColumn: week + 1,
-        gridRow: day + 1,
-      });
+      cells.push({ id: `sample-${week}-${weekday}`, date: "", count: level * 2, level, week, weekday });
     }
   }
 
   return {
-    totalContributions: 1284,
-    fromLabel: "sample",
-    toLabel: "data",
+    totalContributions: cells.reduce((sum, cell) => sum + cell.count, 0),
+    weeks: WINDOW_WEEKS,
     cells,
-    topStarredRepositories: [],
-    recentlyActiveRepositories: [],
     source: "fallback",
   };
 }
 
 export async function getGitHubActivity(): Promise<GitHubActivity> {
   const token = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN;
-  const username = process.env.GH_USERNAME ?? process.env.GITHUB_USERNAME;
+  const username = process.env.GH_USERNAME || process.env.GITHUB_USERNAME || site.githubUsername;
 
-  if (!token || !username) {
+  if (!token) {
     return createFallbackActivity();
   }
 
@@ -207,15 +161,8 @@ export async function getGitHubActivity(): Promise<GitHubActivity> {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        query: githubQuery,
-        variables: {
-          login: username,
-        },
-      }),
-      next: {
-        revalidate: 60 * 60 * 6,
-      },
+      body: JSON.stringify({ query: githubQuery, variables: { login: username } }),
+      signal: AbortSignal.timeout(15_000),
     });
 
     if (!response.ok) {
@@ -223,25 +170,18 @@ export async function getGitHubActivity(): Promise<GitHubActivity> {
     }
 
     const payload = (await response.json()) as GitHubGraphQLResponse;
-    const user = payload.data?.user;
+    const calendar = payload.data?.user?.contributionsCollection.contributionCalendar;
 
-    if (!user || payload.errors?.length) {
+    if (!calendar || payload.errors?.length) {
       return createFallbackActivity();
     }
 
-    const weeks = user.contributionsCollection.contributionCalendar.weeks;
-    const cells = normalizeWeeks(weeks);
+    const cells = normalizeWeeks(calendar.weeks);
 
     return {
-      totalContributions:
-        user.contributionsCollection.contributionCalendar.totalContributions,
-      fromLabel: cells[0]?.date ? formatMonthLabel(cells[0].date) : "recent",
-      toLabel: cells.at(-1)?.date
-        ? formatMonthLabel(cells.at(-1)!.date)
-        : "now",
+      totalContributions: calendar.totalContributions,
+      weeks: Math.max(1, ...cells.map((cell) => cell.week + 1)),
       cells,
-      topStarredRepositories: user.topStarredRepositories.nodes,
-      recentlyActiveRepositories: user.recentlyActiveRepositories.nodes,
       source: "github",
     };
   } catch {

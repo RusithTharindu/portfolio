@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
-const basePath =
-  process.env.NEXT_PUBLIC_BASE_PATH ??
-  (process.env.GITHUB_ACTIONS ? "/portfolio" : "");
-
+// Static export for GitHub Pages on the custom domain rusith.dev (no basePath).
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
