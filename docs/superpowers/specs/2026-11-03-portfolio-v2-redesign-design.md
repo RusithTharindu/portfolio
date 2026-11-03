@@ -84,7 +84,7 @@ Home, top to bottom:
 6. **Writing:** latest Medium posts (title, date, link) fetched at build time from the Medium RSS feed for `@devrusith`. If the fetch fails or returns nothing, hide the section rather than failing the build.
 7. **Shelf (changed by Rusith, 2026-11-03: books instead of anime/manga/games):** books standing spine-out on a shelf; picking one turns it to show its cover, with title, author, a "reading now" tag and a one-line note from Rusith below. The idea follows Aditya's bookshelf; the implementation and look (ink spines, typographic covers) are our own. Typed data file (`src/data/books.ts`); optional cover images stored locally under `public/books/`.
 8. **Socials:** icon tile, name, handle, arrow. From existing `socials` data.
-9. **Stack:** numbered list (01, 02, …) of grouped skills. Trim the existing `stackGroups` to the essential groups.
+9. **Stack (updated by Rusith, 2026-11-03):** numbered list (01–10) of his own ten skill groups, from Frontend Development to Tools I Use, kept in `src/data/stack.ts`.
 10. **Commits:** contribution graph using real data from `src/lib/github.ts`, amber scale, total count rolls up when scrolled into view.
 11. **Footer:** signature that draws itself on scroll, a short closing line, link to the v1 code.
 
