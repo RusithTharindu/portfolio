@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { type RefObject, useEffect, useRef } from "react";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -12,30 +12,62 @@ type RevealProps = {
   "aria-labelledby"?: string;
 };
 
-const elements = {
-  div: motion.div,
-  li: motion.li,
-  section: motion.section,
-} as const;
-
 /**
  * Fades and lifts its content in once, the first time it scrolls into view.
- * Reduced motion keeps only the fade (see MotionProvider); without JS the
- * `data-reveal` noscript rule in the root layout keeps it visible.
+ *
+ * The static HTML is always visible: only blocks that start below the fold are
+ * hidden after hydration (`data-reveal="pending"`), so above-the-fold content
+ * paints immediately, and nothing is hidden without JS or with reduced motion.
+ * The transition itself lives in globals.css.
  */
 export function Reveal({ children, delay = 0, as = "div", ...props }: RevealProps) {
-  const Element = elements[as];
+  const ref = useRef<HTMLElement>(null);
 
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (node.getBoundingClientRect().top < window.innerHeight) return;
+
+    node.dataset.reveal = "pending";
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        node.dataset.reveal = "shown";
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -40px 0px" },
+    );
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+      node.dataset.reveal = "";
+    };
+  }, []);
+
+  const shared = {
+    "data-reveal": "",
+    style: delay ? { transitionDelay: `${delay}s` } : undefined,
+    ...props,
+  };
+
+  if (as === "section") {
+    return (
+      <section ref={ref} {...shared}>
+        {children}
+      </section>
+    );
+  }
+  if (as === "li") {
+    return (
+      <li ref={ref as RefObject<HTMLLIElement | null>} {...shared}>
+        {children}
+      </li>
+    );
+  }
   return (
-    <Element
-      data-reveal=""
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      {...props}
-    >
+    <div ref={ref as RefObject<HTMLDivElement | null>} {...shared}>
       {children}
-    </Element>
+    </div>
   );
 }

@@ -78,7 +78,7 @@ function StickerFace({ sticker }: { sticker: HeroSticker }) {
     <span className="grid h-full w-full place-items-center px-2 text-center font-mono text-[10px] leading-tight text-[#8a8a8a]">
       <span className="whitespace-nowrap">
         {sticker.label}
-        {sticker.width >= 120 ? <span className="block text-t4">ink sketch</span> : null}
+        {sticker.width >= 120 ? <span className="block text-t3">ink sketch</span> : null}
       </span>
     </span>
   );
