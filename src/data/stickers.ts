@@ -1,5 +1,5 @@
 export type HeroSticker = {
-  id: "passport" | "padlock" | "keyboard" | "tea";
+  id: "book" | "keyboard" | "gameboy" | "coffee";
   /** Shown in the placeholder tile until `src` is set. */
   label: string;
   /** Ink sketch under `public/brand/stickers/`. */
@@ -14,10 +14,10 @@ export type HeroSticker = {
   rotate: number;
 };
 
-// Ink sketches arrive later: drop `public/brand/stickers/<id>.png` in and set `src`.
+// Cut-out stickers with their own white edge; width/height follow each image's aspect ratio.
 export const stickers: HeroSticker[] = [
-  { id: "passport", label: "passport", alt: "Ink sketch of a passport", left: "4%", top: 22, width: 122, height: 92, rotate: -8 },
-  { id: "keyboard", label: "keyboard", alt: "Ink sketch of a keyboard", left: "31%", top: 50, width: 160, height: 104, rotate: 3 },
-  { id: "padlock", label: "padlock", alt: "Ink sketch of a padlock", left: "74%", top: 10, width: 108, height: 86, rotate: 9 },
-  { id: "tea", label: "tea cup", alt: "Ink sketch of a cup of tea", left: "60%", top: 140, width: 90, height: 74, rotate: -5 },
+  { id: "book", label: "book", src: "/brand/stickers/book.webp", alt: "Brush sketch of a red book with a ribbon bookmark", left: "3%", top: 16, width: 132, height: 106, rotate: -8 },
+  { id: "keyboard", label: "keyboard", src: "/brand/stickers/keyboard.webp", alt: "Brush sketch of a black and red mechanical keyboard", left: "30%", top: 44, width: 174, height: 116, rotate: 3 },
+  { id: "gameboy", label: "game boy", src: "/brand/stickers/gameboy-controller.webp", alt: "Brush sketch of a Game Boy", left: "76%", top: 4, width: 98, height: 102, rotate: 9 },
+  { id: "coffee", label: "coffee cup", src: "/brand/stickers/coffee-cup.webp", alt: "Brush sketch of a steaming coffee cup", left: "60%", top: 126, width: 94, height: 96, rotate: -5 },
 ];

@@ -39,10 +39,74 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "doodledraw",
+    slug: "mizuniwa",
     featured: true,
     isNew: true,
     number: "01",
+    title: "Mizuniwa",
+    shortTitle: "Mizuniwa",
+    tagline: "Interactive koi pond",
+    description:
+      "An interactive koi pond in the browser: spine-driven koi, GPU ripples that refract the pebble floor, feeding, scaring and stirring the water.",
+    tags: ["Next.js", "three.js", "GLSL"],
+    year: "2026",
+    status: "LIVE",
+    heading: {
+      before: "",
+      emphasis: "Mizuniwa",
+      after: "a koi pond you can touch.",
+    },
+    lede:
+      "水庭, \"water garden\". A realistic koi pond that runs in the browser. Koi with spine-driven swimming school around a pebble pond; you can poke the water and watch ripples refract the floor, drop food and watch the fish rise to it, scatter them, or drag a finger through the water.",
+    previewImage: "/projects/mizuniwa/preview.webp",
+    previewSize: { width: 1440, height: 850 },
+    previewAlt:
+      "Mizuniwa: Kohaku, Showa, Tancho and Ogon koi swimming over a pebble floor with caustics and lily pads, with the control panel on the right and the music player at the bottom.",
+    actions: [
+      {
+        label: "Live pond",
+        href: "https://mizuniwa.vercel.app",
+      },
+    ],
+    overview: {
+      problem:
+        "Most browser fish tanks are sprites on a loop. The goal was a pond that feels alive and answers touch: water that ripples and bends light the way real water does, and koi that swim, school, feed and startle like fish rather than looping animations, at a smooth frame rate on both laptops and phones.",
+      approach:
+        "A single imperative pond engine runs inside React Three Fiber's frame loop, so React never re-renders per frame and the UI talks to it only through a Zustand store. Each frame turns pointer input into ripples, food and steering forces; steers the koi with boids-style behaviour and rebuilds their spines; runs a fixed-timestep wave equation on ping-pong GPU render targets; draws the underwater scene off-screen; and composites it through custom GLSL that refracts the floor through the ripple normals and adds Fresnel reflection and sun glint. GSAP handles time-based transitions such as spawning, panic and time-of-day lighting.",
+    },
+    role:
+      "Solo build. Designed and implemented the rendering pipeline, GLSL shaders, ripple simulation, koi geometry and spine physics, schooling behaviour, interaction modes, adaptive quality, control panel and the music player.",
+    highlights: [
+      "Each koi is one draw call: body and fins are parametric grids bent along a 14-joint spine in the vertex shader, with a tail wave that speeds up with swim speed and fins that row, tuck and brake on turns.",
+      "GPU ripple simulation on half-float ping-pong targets, refracting the pebble floor and its caustics, with Fresnel sky reflection and a localised sun glint.",
+      "Six cursor modes (ripple, trail, feed, attract, scatter, hand) with multi-touch support and keyboard shortcuts.",
+      "Seven procedurally patterned koi varieties (Kohaku, Sanke, Showa, Ogon, Asagi, Tancho, Butterfly); no textures needed.",
+      "Adaptive quality steps through four levels by measured frame rate and locks to avoid flicker; touch devices start at Medium.",
+      "Spotify-style music player with Media Session controls, remembered settings, and no autoplay.",
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React Three Fiber",
+      "three.js",
+      "GLSL",
+      "GSAP",
+      "Zustand",
+      "Tailwind CSS",
+      "Vercel",
+    ],
+    glance: [
+      ["Surface", "Interactive WebGL koi pond"],
+      ["Rendering", "React Three Fiber, custom GLSL"],
+      ["Simulation", "GPU wave equation, boids, spine physics"],
+      ["Input", "Mouse, pen and multi-touch, six modes"],
+      ["Status", "Live / private source"],
+    ],
+  },
+  {
+    slug: "doodledraw",
+    featured: true,
+    number: "02",
     title: "DoodleDraw",
     shortTitle: "Doodle",
     tagline: "Local-first drawing app",
@@ -111,7 +175,7 @@ export const projects: Project[] = [
   {
     slug: "spendshift",
     featured: true,
-    number: "02",
+    number: "03",
     title: "SpendShift",
     shortTitle: "SpendShift",
     tagline: "Expense tracker with budgets",
@@ -177,7 +241,7 @@ export const projects: Project[] = [
   {
     slug: "passgo",
     featured: true,
-    number: "03",
+    number: "04",
     title: "Project PassGo",
     shortTitle: "PassGo",
     tagline: "Digital passport services",
@@ -243,7 +307,7 @@ export const projects: Project[] = [
   {
     slug: "respawn-realm",
     featured: true,
-    number: "04",
+    number: "05",
     title: "RespawnRealm",
     shortTitle: "Respawn",
     tagline: "Gaming landing experience",
@@ -295,7 +359,7 @@ export const projects: Project[] = [
   {
     slug: "healthharmony",
     featured: true,
-    number: "05",
+    number: "06",
     title: "HealthHarmony",
     shortTitle: "Health",
     tagline: "Patient intake and appointments",
@@ -356,7 +420,7 @@ export const projects: Project[] = [
   },
   {
     slug: "techie-sleuths-2024",
-    number: "06",
+    number: "07",
     title: "Techie Sleuths 2024",
     shortTitle: "Sleuths",
     tagline: "Puzzle-event frontend",
@@ -416,7 +480,7 @@ export const projects: Project[] = [
   },
   {
     slug: "campus-housing-portal",
-    number: "07",
+    number: "08",
     title: "Campus Housing Portal",
     shortTitle: "Housing",
     tagline: "Student housing portal",
@@ -473,7 +537,7 @@ export const projects: Project[] = [
   },
   {
     slug: "purrfectpal",
-    number: "08",
+    number: "09",
     title: "PurrfectPal",
     shortTitle: "Purrfect",
     tagline: "Pet-care mobile app",
@@ -529,7 +593,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tasktrail",
-    number: "09",
+    number: "10",
     title: "TaskTrail",
     shortTitle: "TaskTrail",
     tagline: "Task marketplace app",

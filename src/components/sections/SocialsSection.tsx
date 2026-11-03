@@ -1,15 +1,21 @@
 import { Band } from "@/src/components/chrome/Band";
-import { Reveal } from "@/src/components/chrome/Reveal";
+import { RevealGroup } from "@/src/components/chrome/RevealGroup";
 import { SocialIcon } from "@/src/components/sections/SocialIcon";
 import { socials } from "@/src/data/site";
 
 export function SocialsSection() {
   return (
-    <Reveal as="section" id="socials" aria-labelledby="socials-title">
+    <RevealGroup as="section" id="socials" aria-labelledby="socials-title">
       <Band id="socials-title" title="Socials" />
-      <ul>
+      {/* Two columns from sm up; an odd last item spans the full row so no empty cell is left,
+          and with an even count the last row's left item drops its bottom rule too. */}
+      <ul className="grid sm:grid-cols-2">
         {socials.map((social) => (
-          <li key={social.label} className="border-b border-line last:border-b-0">
+          <li
+            key={social.label}
+            data-reveal-item=""
+            className="border-b border-line last:border-b-0 sm:odd:border-r sm:last:border-r-0 sm:last:odd:col-span-2 sm:[&:nth-last-child(2):nth-child(odd)]:border-b-0"
+          >
             <a
               href={social.href}
               target="_blank"
@@ -37,6 +43,6 @@ export function SocialsSection() {
           </li>
         ))}
       </ul>
-    </Reveal>
+    </RevealGroup>
   );
 }

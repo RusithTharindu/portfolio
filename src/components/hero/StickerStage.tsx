@@ -34,14 +34,16 @@ type StickerProps = {
   rotate: number;
   style: CSSProperties;
   draggable: boolean;
+  /** Dark rounded tile behind the content; off for cut-out images that bring their own shape. */
+  tile?: boolean;
   className?: string;
   children: React.ReactNode;
 };
 
-function Sticker({ index, rotate, style, draggable, className = "", children }: StickerProps) {
+function Sticker({ index, rotate, style, draggable, tile = true, className = "", children }: StickerProps) {
   return (
     <motion.div
-      className={`absolute select-none rounded-2xl border-[5px] border-[#f2f0ea] bg-[#050505] shadow-[0_8px_22px_rgba(0,0,0,0.7)] ${
+      className={`absolute select-none ${tile ? "rounded-2xl bg-[#050505] shadow-[0_8px_22px_rgba(0,0,0,0.7)]" : ""} ${
         draggable ? "cursor-grab active:cursor-grabbing" : ""
       } ${className}`}
       style={{ ...style, rotate }}
@@ -69,7 +71,7 @@ function StickerFace({ sticker }: { sticker: HeroSticker }) {
         src={sticker.src}
         alt=""
         draggable={false}
-        className="pointer-events-none h-full w-full rounded-[11px] object-contain"
+        className="pointer-events-none h-full w-full object-contain drop-shadow-[0_8px_14px_rgba(0,0,0,0.65)]"
       />
     );
   }
@@ -99,6 +101,7 @@ export function StickerStage() {
           index={index + 1}
           rotate={sticker.rotate}
           draggable={draggable}
+          tile={!sticker.src}
           style={placement(sticker.left, sticker.top, sticker.width, sticker.height)}
         >
           <StickerFace sticker={sticker} />

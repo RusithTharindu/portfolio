@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/src/components/chrome/Logo";
 import { type SectionLink, sectionHref } from "@/src/components/chrome/sections";
+import { SocialIcon } from "@/src/components/sections/SocialIcon";
 import { getCvHref, site } from "@/src/data/site";
 
 type SiteHeaderProps = {
@@ -42,6 +43,15 @@ export function SiteHeader({ sections }: SiteHeaderProps) {
           </ul>
         </nav>
       ) : null}
+      <a
+        href={site.githubUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="GitHub profile (opens in a new tab)"
+        className="col-start-3 grid size-7 place-items-center justify-self-end rounded-lg border border-[#222] bg-[#151515] text-t3 transition-colors duration-200 hover:border-[#3a3a3a] hover:text-t1"
+      >
+        <SocialIcon name="github" size={15} />
+      </a>
     </header>
   );
 }

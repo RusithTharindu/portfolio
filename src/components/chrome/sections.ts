@@ -1,4 +1,4 @@
-/** A page section the header pills, side rail and menu can point at. */
+/** A page section the header pills and menu can point at. */
 export type SectionLink = {
   /** Element id on the page. */
   id: string;
@@ -12,7 +12,9 @@ export const homeSectionLinks: SectionLink[] = [
   { id: "home", label: "home", href: "/" },
   { id: "work", label: "work", href: "/#work" },
   { id: "experience", label: "experience", href: "/#experience" },
-  { id: "shelf", label: "shelf", href: "/#shelf" },
+  { id: "education", label: "education", href: "/#education" },
+  // Hidden with the book shelf on the home page.
+  // { id: "shelf", label: "shelf", href: "/#shelf" },
   { id: "socials", label: "socials", href: "/#socials" },
   { id: "stack", label: "stack", href: "/#stack" },
 ];

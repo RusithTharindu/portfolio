@@ -3,6 +3,7 @@ export type SocialIconName =
   | "github"
   | "linkedin"
   | "x"
+  | "instagram"
   | "medium"
   | "bluesky"
   | "reddit";
@@ -50,6 +51,14 @@ export function SocialIcon({ name, size = 16 }: SocialIconProps) {
       return (
         <svg {...common} viewBox="0 0 24 24" fill="currentColor">
           <path d="M13.54 12c0 4.05-3.02 7.33-6.75 7.33S.04 16.05.04 12 3.06 4.67 6.79 4.67s6.75 3.28 6.75 7.33Zm7.4 0c0 3.81-1.51 6.9-3.38 6.9s-3.38-3.09-3.38-6.9 1.51-6.9 3.38-6.9 3.38 3.09 3.38 6.9Zm3.02 0c0 3.41-.53 6.18-1.19 6.18s-1.19-2.77-1.19-6.18.53-6.18 1.19-6.18 1.19 2.77 1.19 6.18Z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
         </svg>
       );
     case "bluesky":

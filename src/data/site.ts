@@ -13,7 +13,8 @@ export type Site = {
   githubUsername: string;
   v1Url: "https://github.com/RusithTharindu/portfolio/tree/v1";
   url: "https://rusith.dev";
-  logo: { src: string; alt: string };
+  /** `ogSrc` is a PNG copy for the social preview image, which can't read WebP. */
+  logo: { src: string; ogSrc: string; alt: string };
 };
 
 export const site: Site = {
@@ -31,26 +32,47 @@ export const site: Site = {
   v1Url: "https://github.com/RusithTharindu/portfolio/tree/v1",
   url: "https://rusith.dev",
   // Swap for "/brand/logo.png" once the real ink logo lands.
-  logo: { src: "/brand/logo-placeholder.svg", alt: "Rusith's ink-brush logo" },
+  logo: { src: "/brand/logo.webp", ogSrc: "/brand/logo-og.png", alt: "Rusith's ink-brush logo" },
 };
 
 export type SocialLink = {
   label: string;
   handle: string;
   href: string;
-  icon: "github" | "linkedin" | "x" | "medium" | "bluesky";
+  icon: "github" | "linkedin" | "x" | "instagram" | "medium" | "bluesky";
 };
 
 export const socials: SocialLink[] = [
-  { label: "GitHub", handle: "@RusithTharindu", href: "https://github.com/RusithTharindu", icon: "github" },
+  {
+    label: "GitHub",
+    handle: "@RusithTharindu",
+    href: "https://github.com/RusithTharindu",
+    icon: "github",
+  },
   {
     label: "LinkedIn",
     handle: "rusith-tharindu-thushan",
     href: "https://www.linkedin.com/in/rusith-tharindu-thushan/",
     icon: "linkedin",
   },
-  { label: "Medium", handle: "@devrusith", href: "https://medium.com/@devrusith", icon: "medium" },
-  { label: "X", handle: "@ruziya66_", href: "https://x.com/ruziya66_", icon: "x" },
+  {
+    label: "Medium",
+    handle: "@devrusith",
+    href: "https://medium.com/@devrusith",
+    icon: "medium",
+  },
+  {
+    label: "X",
+    handle: "@ruziya66_",
+    href: "https://x.com/ruziya66_",
+    icon: "x",
+  },
+  {
+    label: "Instagram",
+    handle: "@ruziya66_",
+    href: "https://www.instagram.com/ruziya66_",
+    icon: "instagram",
+  },
   {
     label: "Bluesky",
     handle: "@rusiththarindu.bsky.social",
